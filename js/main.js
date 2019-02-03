@@ -16,16 +16,22 @@ var app = new Vue({
             fetch(this.url, {
                     method: "GET",
                 })
+                .then(function (res) {
+                    if (!res.ok) {
+                        throw Error(res.status);
+                    }
+                    return res;
+                })
                 .then(function (data) {
                     return data.json();
                 })
                 .then(function (myData) {
                     app.books = myData.books;
                 })
+                .catch(function (err) {
+                    console.log(err);
+                })
         }
-
-
-
     },
 
     computed: {
@@ -39,7 +45,7 @@ var app = new Vue({
                     if (this.books[i].title.toLowerCase().includes(this.searched.toLowerCase()) || this.books[i].description.toLowerCase().includes(this.searched.toLowerCase())) {
                         document.getElementById("noMatchingResult").style.display = "none";
                         searchedBooks.push(this.books[i]);
-                    } else if(searchedBooks.length=== 0) {
+                    } else if (searchedBooks.length === 0) {
                         document.getElementById("noMatchingResult").style.display = "block";
                     }
                 }
