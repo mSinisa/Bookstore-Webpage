@@ -6,29 +6,27 @@ var app = new Vue({
         url: "https://api.myjson.com/bins/zyv02",
         searched: [],
         books: []
-
-
     },
 
     methods: {
 
-        getData: function () {
+        getData() {
             fetch(this.url, {
                     method: "GET",
                 })
-                .then(function (res) {
+                .then(res => {
                     if (!res.ok) {
                         throw Error(res.status);
                     }
                     return res;
                 })
-                .then(function (data) {
+                .then(data => {
                     return data.json();
                 })
-                .then(function (myData) {
+                .then(myData => {
                     app.books = myData.books;
                 })
-                .catch(function (err) {
+                .catch(err => {
                     console.log(err);
                 })
         }
@@ -36,7 +34,7 @@ var app = new Vue({
 
     computed: {
 
-        filterSearchedBooks: function () {
+        filterSearchedBooks () {
             var searchedBooks = [];
             if (this.searched == "") {
                 return this.books;
@@ -55,7 +53,7 @@ var app = new Vue({
 
     },
 
-    created: function () {
+    created () {
         this.getData();
         document.getElementById("noMatchingResult").style.display = "none";
     }
