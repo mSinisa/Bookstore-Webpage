@@ -1,4 +1,4 @@
-var app = new Vue({
+let app = new Vue({
 
     el: "#app",
 
@@ -35,11 +35,11 @@ var app = new Vue({
     computed: {
 
         filterSearchedBooks () {
-            var searchedBooks = [];
+            let searchedBooks = [];
             if (this.searched == "") {
                 return this.books;
             } else {
-                for (var i = 0; i < this.books.length; i++) {
+                for (let i = 0; i < this.books.length; i++) {
                     if (this.books[i].title.toLowerCase().includes(this.searched.toLowerCase()) || this.books[i].description.toLowerCase().includes(this.searched.toLowerCase())) {
                         document.getElementById("noMatchingResult").style.display = "none";
                         searchedBooks.push(this.books[i]);
